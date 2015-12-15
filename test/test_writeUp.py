@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 
 import unittest
 from writeup.writeup import WriteUp
+from writeup.writeup import CategoryError
 from datetime import date
 
 class TDDWriteUp(unittest.TestCase):
@@ -27,6 +28,13 @@ class TDDWriteUp(unittest.TestCase):
         write_up = WriteUp("test/test.tex")
         result = write_up.ID
         self.assertEqual("F112", result)
+
+    def test_write_up_finds_category(self):
+        write_up = WriteUp("test/test.tex")
+        self.assertEqual("Matrices, Vectors and Linear Equations", write_up.category)
+
+    def test_write_up_raises_category(self):
+        self.assertRaises(CategoryError, WriteUp, 'test/test-raise-category-error.tex')
 
     def test_write_up_parses_keywords(self):
         write_up = WriteUp("test/test.tex")

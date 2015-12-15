@@ -8,10 +8,40 @@ from itertools import chain
 from datetime import date
 from datetime import datetime
 
+categories = {
+    'A': 'Arithmetic Routines',
+    'B': 'Elementary Functions',
+    'C': 'Equations and Special Functions',
+    'D': 'Integration, Minimization, Non-linear Fitting',
+    'E': 'Interpolation, Approximations, Linear Fitting',
+    'F': 'Matrices, Vectors and Linear Equations',
+    'G': 'Statistical Analysis and Probability',
+    'H': 'Operation Research Techniques and Management Science',
+    'I': 'Input/Output',
+    'J': 'Output and Graphical Data Presentation',
+    'K': 'Internal Information Transfer',
+    'L': 'Executive Routines',
+    'M': 'Data Handling',
+    'N': 'Debugging, Error Handlng',
+    'Q': 'Service or Housekeeping Programming Aids',
+    'R': 'Logical and Symbolic',
+    'T': 'Magnet and Beam Design, Electronics',
+    'U': 'Quantum Mechanics, Particle Physics',
+    'V': 'Random Numbers and General Purpose Utilities',
+    'W': 'High Energy Physics Simulation, Kinematics, Phase Space',
+    'X': 'Particle Detection, Measurement, Reconstruction',
+    'Y': 'Statistical Data Analysis and Presentation',
+    'Z': 'Miscellaneous System-Dependent Facilities',
+}
+
+class CategoryError(Exception):
+    def __init__(self,value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
 class WriteUp:
 
-    author = ''
-    ID = ''
 
     def __init__(self, fileName):
         self._fileName = fileName
@@ -29,6 +59,15 @@ class WriteUp:
 
             # parse Routine ID from tex
             self.ID = re.search(r'.*\\Routid{(.*?)}', content).group(1).strip()
+
+            # lookup heading for the Write-Up ID
+            try:
+                self.category = categories.get(self.ID[0])
+                if not self.category:
+                    raise
+            except:
+                raise CategoryError('unknown write-up category')
+
 
             # parse keyword fields from tex
             self.keywords = re.findall(r'\\Keywords{(.*?)}', content)
