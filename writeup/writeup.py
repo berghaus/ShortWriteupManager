@@ -87,6 +87,9 @@ class WriteUp:
             # parse library from tex
             self.library = re.search(r'.*\\Library{(.*?)}', content).group(1).lower().strip()
 
+            # parse library from tex
+            self.version = re.search(r'.*\\Version{(.*?)}', content).group(1).strip().lower()
+
             # parse submission date from tex
             bdt = datetime.strptime(re.search(r'.*\\Submitted{(.*?)}', content).group(1),"%d.%m.%Y")
             self.submitted = date(bdt.year,bdt.month,bdt.day)

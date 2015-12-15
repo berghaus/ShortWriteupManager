@@ -66,6 +66,10 @@ class TDDWriteUp(unittest.TestCase):
         write_up = WriteUp("test/test.tex")
         self.assertEqual("fortran",write_up.language)
 
+    def test_write_up_parses_version(self):
+        write_up = WriteUp("test/test.tex")
+        self.assertEqual("tr",write_up.version)
+
     def test_write_up_parses_submitter(self):
         write_up = WriteUp("test/test.tex")
         self.assertEqual("Waggleton P. Tallylicker",write_up.submitter)
