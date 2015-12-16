@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/berghaus/ShortWriteupManager.svg?branch=master)](https://travis-ci.org/berghaus/ShortWriteupManager)
+
 # ShortWriteupManager
 The CERN Program Library is a set of scientific software tools. They adress the needs of physics laboratories and researchers. These tools are contained in a set of libraries and modules. The code is written in FORTRAN. Contemporary projects such as SciPy provide some if CERNLIB's functionality.
 
